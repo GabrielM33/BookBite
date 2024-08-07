@@ -5,17 +5,17 @@ export const navLinks = [
     icon: "/assets/icons/home.svg",
   },
   {
-    label: "Image Restore",
+    label: "Summarize Book",
     route: "/transformations/add/restore",
     icon: "/assets/icons/image.svg",
   },
   {
-    label: "Generative Fill",
+    label: "Summarize Chapter",
     route: "/transformations/add/fill",
     icon: "/assets/icons/stars.svg",
   },
   {
-    label: "Object Remove",
+    label: "Key Insights",
     route: "/transformations/add/remove",
     icon: "/assets/icons/scan.svg",
   },

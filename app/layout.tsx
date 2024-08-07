@@ -13,7 +13,7 @@ const IBMPlex = IBM_Plex_Sans({
 
 export const metadata: Metadata = {
   title: "BookBite",
-  description: "AI-powered image generator",
+  description: "AI-powered book summaries",
 };
 
 export default function RootLayout({
