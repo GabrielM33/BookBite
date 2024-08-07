@@ -31,17 +31,17 @@ export const navLinks = [
   },
   {
     label: "Summarize Book",
-    route: "/summarize/add/book",
+    route: "/summaries/add/book",
     icon: "/assets/icons/image.svg",
   },
   {
     label: "Summarize Chapter",
-    route: "/summarize/add/add/chapter",
+    route: "/summaries/add/chapter",
     icon: "/assets/icons/image.svg",
   },
   {
     label: "Key Insights",
-    route: "/summarize/add/add/insights",
+    route: "/summaries/add/insights",
     icon: "/assets/icons/image.svg",
   },
   {
