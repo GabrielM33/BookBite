@@ -3,6 +3,7 @@ import { IBM_Plex_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react"
 
 import "./globals.css";
 
@@ -29,6 +30,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={cn("font-IBMPlex antialiased", IBMPlex.variable)}>
           <SpeedInsights />
+          <Analytics/>
           {children}
         </body>
       </html>
