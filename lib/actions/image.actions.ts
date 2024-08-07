@@ -108,7 +108,7 @@ export async function getAllImages({ limit = 9, page = 1, searchQuery = '' }: {
       secure: true,
     })
 
-    let expression = 'folder=imaginify'; // FIX ME //////////////////////////////////////////////////////////////////////////////////////////////////
+    let expression = 'folder=bookbite'; // FIX ME //////////////////////////////////////////////////////////////////////////////////////////////////
 
     if (searchQuery) {
       expression += ` AND ${searchQuery}`
