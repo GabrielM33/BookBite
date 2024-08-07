@@ -5,17 +5,17 @@ export const navLinks = [
     icon: "/assets/icons/home.svg",
   },
   {
-    label: "Summarize Book",
+    label: "Image Restore",
     route: "/transformations/add/restore",
     icon: "/assets/icons/image.svg",
   },
   {
-    label: "Summarize Chapter",
+    label: "Generative Fill",
     route: "/transformations/add/fill",
     icon: "/assets/icons/stars.svg",
   },
   {
-    label: "Key Insights",
+    label: "Object Remove",
     route: "/transformations/add/remove",
     icon: "/assets/icons/scan.svg",
   },
@@ -28,6 +28,21 @@ export const navLinks = [
     label: "Background Remove",
     route: "/transformations/add/removeBackground",
     icon: "/assets/icons/camera.svg",
+  },
+  {
+    label: "Summarize Book",
+    route: "/summarize/add/book",
+    icon: "/assets/icons/image.svg",
+  },
+  {
+    label: "Summarize Chapter",
+    route: "/summarize/add/add/chapter",
+    icon: "/assets/icons/image.svg",
+  },
+  {
+    label: "Key Insights",
+    route: "/summarize/add/add/insights",
+    icon: "/assets/icons/image.svg",
   },
   {
     label: "Profile",
