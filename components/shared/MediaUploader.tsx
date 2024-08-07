@@ -53,7 +53,7 @@ const MediaUploader = ({
 
   return (
     <CldUploadWidget
-      uploadPreset="jsm_imaginify" // FIX ME //////////////////////////////////////////////////////////////////////////////////////////////////
+      uploadPreset="envision_bookbite"
       options={{
         multiple: false,
         resourceType: "image",
