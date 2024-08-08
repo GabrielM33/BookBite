@@ -1,0 +1,45 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import OpenAI from 'openai'; // Import the OpenAI class directly
+
+// Create an instance of OpenAI with your API key
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    if (req.method !== 'POST') {
+      return res.status(405).json({ message: 'Method not allowed' });
+    }
+  
+    const { bookName, author } = req.body;
+  
+    if (!bookName || !author) {
+      return res.status(400).json({ message: 'Book name and author are required' });
+    }
+  
+    try {
+      const completion = await openai.chat.completions.create({
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant that summarizes books.' },
+          { role: 'user', content: `Summarize the book "${bookName}" by ${author}.` },
+        ],
+        model: 'gpt-3.5-turbo',
+      });
+  
+      const summary = completion.choices[0].message?.content;
+  
+      console.log('Generated summary:', summary); // Log the summary to check if it's generated
+  
+      if (summary) {
+        return res.status(200).json({ summary });
+      } else {
+        return res.status(500).json({ message: 'Failed to generate summary' });
+      }
+    } catch (error) {
+      console.error('Error generating summary:', error);
+      return res.status(500).json({ message: 'Error generating summary' });
+    }
+  }
+  
+  
+
