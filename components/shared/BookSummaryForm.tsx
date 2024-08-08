@@ -22,14 +22,13 @@ const formSchema = z.object({
   author: z.string().min(1, "Author name is required"),
 });
 
-// Define the type for the form values
 type FormValues = z.infer<typeof formSchema>;
 
 const BookSummaryForm = () => {
   const router = useRouter();
-  const [summary, setSummary] = useState(''); // State to hold the generated summary
-  const [loading, setLoading] = useState(false); // State to handle loading
-  const [error, setError] = useState<string | null>(null); // State to handle errors
+  const [summary, setSummary] = useState(''); 
+  const [loading, setLoading] = useState(false); 
+  const [error, setError] = useState<string | null>(null);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -41,7 +40,7 @@ const BookSummaryForm = () => {
 
   const generateSummary = async (bookName: string, author: string) => {
     try {
-      const response = await fetch('/api/generate-summary', {
+      const response = await fetch('/api/openai', {  // Correct route to call OpenAI API
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -49,30 +48,33 @@ const BookSummaryForm = () => {
         body: JSON.stringify({ bookName, author }),
       });
   
-      const text = await response.text(); // Get raw text response first
-      console.log('Raw response:', text); // Log the raw response
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`HTTP error! Status: ${response.status}, ${errorText}`);
+      }
   
-      const data = JSON.parse(text); // Then try to parse it as JSON
-  
-      return data.summary;
+      const data = await response.json();
+      return data.summary || 'No summary found';
     } catch (error) {
       console.error('Error:', error);
-      return 'An error occurred while generating the summary.';
+      setError('An error occurred while generating the summary.');
+      return null;
     }
-  };
-  
+};
+
   const onSubmit = async (values: FormValues) => {
-    console.log('Submitting form with values:', values);
-  
+    setLoading(true);
+    setError(null);
+
     const generatedSummary = await generateSummary(values.bookName, values.author);
-    
+
     if (generatedSummary) {
-      console.log('Generated Summary:', generatedSummary);
       setSummary(generatedSummary);
     } else {
-      console.error('No summary was generated.');
       setSummary('No summary was generated.');
     }
+
+    setLoading(false);
   };  
 
   return (
