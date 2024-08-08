@@ -93,10 +93,7 @@ declare type TransformationTypeKey =
   | "fill"
   | "remove"
   | "recolor"
-  | "removeBackground"
-  | "summarizeBook"
-  | "summarizeChapter"
-  | "insights";
+  | "removeBackground";
 
 // ====== URL QUERY PARAMS
 declare type FormUrlQueryParams = {
