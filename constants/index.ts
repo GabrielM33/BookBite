@@ -30,18 +30,18 @@ export const navLinks = [
     icon: "/assets/icons/camera.svg",
   },
   {
-    label: "Summarize Book",
+    label: "Book Summary",
     route: "/summaries/add/book",
     icon: "/assets/icons/image.svg",
   },
   {
-    label: "Summarize Chapter",
+    label: "Chapter Summary",
     route: "/summaries/add/chapter",
     icon: "/assets/icons/image.svg",
   },
   {
     label: "Key Insights",
-    route: "/summaries/add/insights",
+    route: "/summari/add/insights",
     icon: "/assets/icons/image.svg",
   },
   {

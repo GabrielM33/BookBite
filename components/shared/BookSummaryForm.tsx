@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
@@ -16,13 +16,10 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-// If Textarea component doesn't exist, you can use Input instead
-// import { Textarea } from "@/components/ui/textarea"
 
 const formSchema = z.object({
   bookName: z.string().min(1, "Book name is required"),
   author: z.string().min(1, "Author name is required"),
-  summary: z.string().min(10, "Summary must be at least 10 characters long"),
 })
 
 // Define the type for the form values
@@ -30,25 +27,39 @@ type FormValues = z.infer<typeof formSchema>;
 
 const BookSummaryForm = () => {
   const router = useRouter()
+  const [summary, setSummary] = useState(''); // State to hold the generated summary
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       bookName: "",
       author: "",
-      summary: "",
     },
   })
 
+  const generateSummary = async (bookName: string, author: string) => {
+    // Replace this with the actual call to GPT-4 LLM
+    // Here we're just using a mock summary for demonstration
+    const response = await fetch('/api/generate-summary', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ bookName, author }),
+    });
+    const data = await response.json();
+    return data.summary;
+  };
+
   const onSubmit = async (values: FormValues) => {
-    // Here you would typically send the data to your backend
-    console.log(values)
-    // After successful submission, redirect to a confirmation page
-    router.push('/summaries')
+    const generatedSummary = await generateSummary(values.bookName, values.author);
+    setSummary(generatedSummary);
+    // Optionally redirect or perform other actions here
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <h2 className="form-title">Book Summary</h2>
         <FormField
           control={form.control}
           name="bookName"
@@ -56,7 +67,7 @@ const BookSummaryForm = () => {
             <FormItem>
               <FormLabel>Book Name</FormLabel>
               <FormControl>
-                <Input placeholder="Enter the book name" {...field} className="input-field" />
+                <Input {...field} className="input-field" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -70,32 +81,22 @@ const BookSummaryForm = () => {
             <FormItem>
               <FormLabel>Author</FormLabel>
               <FormControl>
-                <Input placeholder="Enter the author's name" {...field} className="input-field" />
+                <Input {...field} className="input-field" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        
-        <FormField
-          control={form.control}
-          name="summary"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Book Summary</FormLabel>
-              <FormControl>
-                <Input 
-                  placeholder="Enter the book summary" 
-                  className="input-field h-32"
-                  {...field} 
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        
-        <Button type="submit" className="submit-button capitalize">Create Summary</Button>
+
+        <Button type="submit" className="submit-button capitalize">Submit</Button>
+
+        <div>
+          <FormLabel>Book Summary</FormLabel>
+          <div className="output-box p-2 border rounded h-32 overflow-y-auto">
+            {summary ? summary : 'The summary will appear here after submission.'}
+          </div>
+        </div>
+
       </form>
     </Form>
   )
