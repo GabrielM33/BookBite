@@ -56,7 +56,7 @@ const BookSummaryForm = () => {
             <FormItem>
               <FormLabel>Book Name</FormLabel>
               <FormControl>
-                <Input placeholder="Enter the book name" {...field} />
+                <Input placeholder="Enter the book name" {...field} className="input-field" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -70,7 +70,7 @@ const BookSummaryForm = () => {
             <FormItem>
               <FormLabel>Author</FormLabel>
               <FormControl>
-                <Input placeholder="Enter the author's name" {...field} />
+                <Input placeholder="Enter the author's name" {...field} className="input-field" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -84,10 +84,9 @@ const BookSummaryForm = () => {
             <FormItem>
               <FormLabel>Book Summary</FormLabel>
               <FormControl>
-                {/* If Textarea doesn't exist, use Input with multiline prop */}
                 <Input 
                   placeholder="Enter the book summary" 
-                  className="h-32"
+                  className="input-field h-32"
                   {...field} 
                 />
               </FormControl>
@@ -96,7 +95,7 @@ const BookSummaryForm = () => {
           )}
         />
         
-        <Button type="submit">Submit Summary</Button>
+        <Button type="submit" className="submit-button capitalize">Create Summary</Button>
       </form>
     </Form>
   )
