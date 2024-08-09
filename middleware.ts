@@ -1,7 +1,7 @@
 import { authMiddleware } from '@clerk/nextjs/server';
 
 export default authMiddleware({
-  publicRoutes: ['/', '/api/webhooks/clerk', '/api/webhooks/stripe', '/api/openai'],
+  publicRoutes: ['/', '/api/webhooks/clerk', '/api/webhooks/stripe', '/api/openai', '/api/llama'],
   apiRoutes: ['/api/(.*)'],  // Correct wildcard pattern
 });
 
